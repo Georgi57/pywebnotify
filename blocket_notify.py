@@ -1,4 +1,5 @@
 from pywebnotify import pywebnotify
+import urllib.request
 
 if __name__ == '__main__':
 		
@@ -13,4 +14,9 @@ if __name__ == '__main__':
 	# Print out all settings
 	print (blocket.get_settings())
 	
-    #page = urllib.request.urlopen(blocket)
+	webpage = str(urllib.request.urlopen(blocket.get_address()).read())
+	
+	first_offer = webpage.find("<div itemscope itemtype=")
+	second_offer = webpage.find("<div itemscope itemtype=", first_offer+1)
+	
+	print (first_offer, second_offer)

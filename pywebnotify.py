@@ -20,6 +20,9 @@ class pywebnotify:
 	
 	def set_address ( self, address ):
 		self.address = str(address)
+		
+	def get_address ( self ):
+		return self.address
 	
 	def set_search_parameter (self, key, value):
 		self.parameters[key]=value
