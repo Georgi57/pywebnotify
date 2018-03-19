@@ -36,4 +36,4 @@ if __name__ == '__main__':
 	
 	print (get_offer_link(webpage, ['<h4 class="media-heading">', 'href="'], '">'))
 
-	
+	print (get_offer_link(webpage, ['<h4 class="media-heading">', '<span class="li_detail_params monthly_rent">'], "/span>"))
