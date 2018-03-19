@@ -20,3 +20,21 @@ if __name__ == '__main__':
 	second_offer = webpage.find("<div itemscope itemtype=", first_offer+1)
 	
 	print (first_offer, second_offer)
+	
+	heading1 = webpage.find('<h4 class="media-heading">', first_offer)
+			
+	print (heading1, webpage[heading1:(heading1+100)])
+	
+	heading2 = webpage.find('href="', heading1)
+	
+	print (heading2, webpage[heading2:(heading2+100)])
+	
+	heading3 = webpage.find('">', heading2)
+	
+	print (heading3, webpage[heading2+6:heading3])
+	
+	#heading2 = webpage.find('">', first_offer)
+	
+	#print (heading1, heading2, webpage[heading1:heading2])
+
+	
