@@ -1,6 +1,24 @@
 from pywebnotify import pywebnotify
 import urllib.request
 
+# Find the link based on the searched text
+# Input works with string and array of strings alike
+def get_offer_link(webpage, search_text, end_text):
+
+	location = 0
+	ending = 0
+	
+	if (isinstance(search_text, list)):
+		for text in search_text:
+			location = webpage.find(text, location)
+	elif (isinstance(search_text, str)):
+		location = webpage.find(text, location)
+	
+	ending = webpage.find(end_text, location)
+	
+	return webpage[location+len(text):ending]
+	
+
 if __name__ == '__main__':
 		
 	# Create new object
@@ -16,25 +34,6 @@ if __name__ == '__main__':
 	
 	webpage = str(urllib.request.urlopen(blocket.get_address()).read())
 	
-	first_offer = webpage.find("<div itemscope itemtype=")
-	second_offer = webpage.find("<div itemscope itemtype=", first_offer+1)
-	
-	print (first_offer, second_offer)
-	
-	heading1 = webpage.find('<h4 class="media-heading">', first_offer)
-			
-	print (heading1, webpage[heading1:(heading1+100)])
-	
-	heading2 = webpage.find('href="', heading1)
-	
-	print (heading2, webpage[heading2:(heading2+100)])
-	
-	heading3 = webpage.find('">', heading2)
-	
-	print (heading3, webpage[heading2+6:heading3])
-	
-	#heading2 = webpage.find('">', first_offer)
-	
-	#print (heading1, heading2, webpage[heading1:heading2])
+	print (get_offer_link(webpage, ['<h4 class="media-heading">', 'href="'], '">'))
 
 	
