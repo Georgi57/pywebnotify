@@ -1,5 +1,6 @@
 from pywebnotify import pywebnotify
 import urllib.request
+import time
 
 # Find the link based on the searched text
 # Input works with string and array of strings alike
@@ -31,15 +32,22 @@ if __name__ == '__main__':
 	# Print out all settings
 	print (blocket.get_settings())
 	
-	webpage = str(urllib.request.urlopen(blocket.get_address()).read())
+	while (True):
 	
-	location = 0
-	n = 0
-	
-	while (location != -1):
-	
-		location, link = get_offer_link(webpage, location+1, ['<h4 class="media-heading">', 'href="'], '">')
-		n += 1
+		webpage = str(urllib.request.urlopen(blocket.get_address()).read())
 		
-		if (location!=-1):
+		location = 0
+		n = 0
+		
+		while (location != -1):
+		
+			location, link = get_offer_link(webpage, location+1, ['<h4 class="media-heading">', 'href="'], '">')
+			n += 1
+			
+			if (location==-1):
+				break
+			
 			print (n, location, link)
+		
+		
+		time.sleep(30)
