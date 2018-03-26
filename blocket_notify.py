@@ -32,6 +32,10 @@ if __name__ == '__main__':
 	# Print out all settings
 	print (blocket.get_settings())
 	
+	number_of_offers = 10
+	offers_saved = 0
+	offers = []
+	
 	while (True):
 	
 		webpage = str(urllib.request.urlopen(blocket.get_address()).read())
@@ -39,7 +43,7 @@ if __name__ == '__main__':
 		location = 0
 		n = 0
 		
-		while (location != -1):
+		while (location != -1 and n<number_of_offers):
 		
 			location, link = get_offer_link(webpage, location+1, ['<h4 class="media-heading">', 'href="'], '">')
 			n += 1
@@ -47,7 +51,17 @@ if __name__ == '__main__':
 			if (location==-1):
 				break
 			
-			print (n, location, link)
+			new_offer = True
+			
+			for offer in offers:
+				if (offer == link):
+					new_offer = False
+					break
+			
+			if (new_offer):
+				offers.append(link)
+				offers.remove(offers[0])
+				print (n, len(offers), link)
 		
 		
 		time.sleep(30)
